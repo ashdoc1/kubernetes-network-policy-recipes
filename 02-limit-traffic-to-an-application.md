@@ -45,7 +45,7 @@ networkpolicy "api-allow" created
 
 Test the Network Policy is **blocking** the traffic, by running a Pod without the `app=bookstore` label:
 
-    $ kubectl run --generator=run-pod/v1 test-$RANDOM --rm -i -t --image=alpine -- sh
+    $ kubectl run test-$RANDOM --rm -i -t --image=alpine -- sh
     / # wget -qO- --timeout=2 http://apiserver
     wget: download timed out
 
@@ -53,7 +53,7 @@ Traffic is blocked!
 
 Test the Network Policy is **allowing** the traffic, by running a Pod with the `app=bookstore` label:
 
-    $ kubectl run --generator=run-pod/v1 test-$RANDOM --rm -i -t --image=alpine --labels app=bookstore,role=frontend -- sh
+    $ kubectl run test-$RANDOM --rm -i -t --image=alpine --labels app=bookstore,role=frontend -- sh
     / # wget -qO- --timeout=2 http://apiserver
     <!DOCTYPE html>
     <html><head>
